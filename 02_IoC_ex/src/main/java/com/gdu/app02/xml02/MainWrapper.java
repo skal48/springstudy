@@ -1,21 +1,25 @@
 package com.gdu.app02.xml02;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
+
+import com.gdu.app02.anno01.AppConfig;
+import com.gdu.app02.anno02.MyJdbcService;
 
 public class MainWrapper {
 
   public static void main(String[] args) {
     
-    AbstractApplicationContext ctx = new GenericXmlApplicationContext("xml02/appCtx.xml");
-    MyJdbcService myJdbcService = ctx.getBean("service", MyJdbcService.class);
+   AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+   
+   MyJdbcService myJdbcService = ctx.getBean("myJdbcService", MyJdbcService.class);
+   
+   myJdbcService.add();
+   myJdbcService.remove();
+   myJdbcService.modify();
+   myJdbcService.select();
     
-    myJdbcService.add();
-    myJdbcService.remove();
-    myJdbcService.modify();
-    myJdbcService.select();
-    
-    ctx.close();
+   ctx.close();
     
   }
 

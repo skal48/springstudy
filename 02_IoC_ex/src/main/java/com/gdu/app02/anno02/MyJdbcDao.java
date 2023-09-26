@@ -1,20 +1,10 @@
-package com.gdu.app02.xml02;
+package com.gdu.app02.anno02;
 
 import java.sql.Connection;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
-import com.gdu.app02.anno01.AppConfig;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class MyJdbcDao {
   
   private Connection con;
@@ -22,7 +12,7 @@ public class MyJdbcDao {
   private MyJdbcConnection myJdbcConnection;
   
   private Connection getConnection() {
-    ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+    ctx = new GenericXmlApplicationContext("xml02/appCtx.xml");
     myJdbcConnection = ctx.getBean("myJdbcConnection", MyJdbcConnection.class);
     ctx.close();
     return myJdbcConnection.getConnection();

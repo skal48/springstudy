@@ -1,15 +1,15 @@
-package com.gdu.app02.xml02;
+package com.gdu.app02.anno02;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
-@AllArgsConstructor
 public class MyJdbcService {
 
-  private MyJdbcDao myJdbcDao; 
+  private MyJdbcDao myJdbcDao;
   
   public void add() {
     myJdbcDao.add();
