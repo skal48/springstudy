@@ -39,7 +39,7 @@ public class MainWrapper {
     System.out.println(woman.getName() + ", " + woman.getAge());
     woman.getCalculator().add(3, 4);
    
-    //ctx  eketl 
+    //ctx  닫기
     ctx.close();
     
     
