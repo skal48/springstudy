@@ -9,7 +9,7 @@ import com.gdu.app01.xml02.Board;
 
 @Configuration
 public class AppConfig {
-  @Bean(name = "user")
+  @Bean(name = "user123")
   public User qwerty() { // name="user"로 인해서 메소드 이름은 의미가 없어진다.
     User user = new User();
     user.setUserId("admin");
@@ -18,7 +18,7 @@ public class AppConfig {
     return user;
   }
   
-  @Bean(name ="board")
+  @Bean(name ="board123")
   public Board qwer() {
     Board board = new Board();
     

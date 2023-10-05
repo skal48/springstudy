@@ -13,7 +13,7 @@ public class MainWrapper {
     AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
     
     // bean 가져오기 
-    Board board = ctx.getBean("board", Board.class);
+    Board board = ctx.getBean("board123", Board.class);
     
     //확인
     System.out.println(board.getTitle() + ", " + board.getEditor());

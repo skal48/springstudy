@@ -2,17 +2,16 @@ package com.gdu.app02.anno02;
 
 import java.sql.Connection;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class MyJdbcDao {
   
   private Connection con;
-  private AbstractApplicationContext ctx;
   private MyJdbcConnection myJdbcConnection;
   
   private Connection getConnection() {
-    ctx = new GenericXmlApplicationContext("xml02/appCtx.xml");
+    AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
     myJdbcConnection = ctx.getBean("myJdbcConnection", MyJdbcConnection.class);
     ctx.close();
     return myJdbcConnection.getConnection();
@@ -22,12 +21,11 @@ public class MyJdbcDao {
     try {
       if(con != null) {
         con.close();
-        System.out.println("GD 접속해제 ");
       }
-      } catch(Exception e) {
-        e.printStackTrace();
-      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
   
   public void add() {
     con = getConnection();

@@ -24,7 +24,7 @@ public class MyController01 {
        2) URL    : 요청 주소 
     */ 
   
-  // value="/" : contextPath 요청을 의미한다. http://localhost/app03/ 주소를 의미한다. 
+  // value= "/" : contextPath 요청을 의미한다. http://localhost/app03/ 주소를 의미한다. 
   @RequestMapping(value={"/","/index.do"}, method=RequestMethod.GET)
   public String welcome() {
     //ViewResolver의 prefix : /WEB-INF/views/
