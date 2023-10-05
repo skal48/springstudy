@@ -2,11 +2,16 @@ package com.gdu.app05.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.gdu.app05.dao.BoardDao;
 import com.gdu.app05.dto.BoardDto;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor  // final field 전용 생성자를 만들어주는 전용 생성자이다.
+                          //  @Autowired를 이용한 생성자주입을 위해서 추가해준 Annotation이다. 
+@Service // 서비스 계층(Business Layer) 전용 @Component, Spring Container에 BoardService boardServiceImpl 객체를 생성해 둔다.
 public class BoardServiceImpl implements BoardService {
   
   /*
@@ -23,16 +28,9 @@ public class BoardServiceImpl implements BoardService {
    *  3) Setter 형식의 메소드에 주입하기
    */
   
-  @Autowired
-  private BoardDao boardDao = new BoardDao();
+ 
+  private final BoardDao boardDao;
   
-  public BoardDao getBoardDao() {
-    return boardDao;
-  }
-
-  public void setBoardDao(BoardDao boardDao) {
-    this.boardDao = boardDao;
-  }
 
   @Override
   public List<BoardDto> getBoardList() {

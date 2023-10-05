@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.gdu.app05.service.BoardService;
 import com.gdu.app05.service.BoardServiceImpl;
 
-@Controller
+@Controller // 컨트롤러 전용 @Component
 public class BoardController {
   
   /*
@@ -51,21 +51,19 @@ public class BoardController {
    *  3) setter 형식의 메소드에 주입하기
    */
   
+  // 주입된 boardService 객체의 변경 방지를 위한 final 처리한다.
+  private final BoardService boardService;
+  
+  // boardService에 final 처리를 하면 생성자 주입만 가능하다.(필드 주입과 setter 주입은 불가능하다. )
+  // 생성자 주입의 @Autowired 는 생략할 수 있으므로 @requiredArgsConstructor와 같은 Annotation으로 대체 할 수 있다. 
   @Autowired
-  private BoardService boardService;
-  
-  
-//  @Autowired
-//  public BoardController(BoardService boardService) { //빈이 여기의 보드 서비스에서 this의 보드서비스로 이동함
-//    super();
-//    this.boardService = boardService;
-//  }
+  public BoardController(BoardService boardService) { //빈이 여기의 보드 서비스에서 this의 보드서비스로 이동함
+    super();
+    this.boardService = boardService;
+  }
 
   
-//  @Autowired
-//  public void setBoardService(BoardService boardService) {
-//    this.boardService = boardService;
-//  }
+
 
   @RequestMapping(value="/board/list.do", method = RequestMethod.GET)
   public String list(Model model) {
