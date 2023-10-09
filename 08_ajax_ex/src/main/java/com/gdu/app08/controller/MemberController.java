@@ -27,26 +27,6 @@ public class MemberController {
     return memberService.getBmiInfo(memberNo);
   }
   
-  @GetMapping(value="member/picture.do", produces="application/octet-stream")
-  public ResponseEntity<byte[]> display(@RequestParam("path") String path ,@RequestParam("filename") String filename){
-    
-    ResponseEntity<byte[]> responseEntity = null;
-    
-    try {
-      File file = new File(path, filename);
-      byte[] b = FileCopyUtils.copyToByteArray(file);
-      
-      responseEntity = new ResponseEntity<byte[]>(b, HttpStatus.OK); 
-      
-    } catch(Exception e) {
-      e.printStackTrace();
-    }
-    
-    return responseEntity;
-    
-  }
-  
-  
   
   @ResponseBody //응답 데이터이다.
   @GetMapping(value = "/member/profile.display", produces="application/octet-stream")

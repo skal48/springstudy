@@ -11,7 +11,6 @@
 <script>
   $(function(){
 	fnMemberInfo();
-	fnFlower();
   })
   function fnMemberInfo(){
 	$('#btn_bmi').click(function(){
@@ -39,15 +38,6 @@
   }
   
   
-  function fnFlower(){
-	  $('#btn_flower').click(function(){
-		  var path = encodeURIComponent('D:\\GDJ69\\assets\\images');
-		  var filename = $('#flower').val();
-		  $('#picture').empty();
-		  $('#picture').append('<img src="${contextPath}/member/picture.do?path=' + path + '$filename=' + filename +'"width="192px">' );
-	  })
-  }
-  
   
 </script>
 </head>
@@ -64,17 +54,6 @@
   </div>
   
   <hr>
-  
-  <div>
-    <div>
-      <select id = 'flower'>
-        <c:forEach var="f" begin="1" end="4" step="1">
-          <option> flower${f}.jpg </option>        
-        </c:forEach>      
-      </select>
-      <button id = "btn_flower">꽃 가져오기</button>
-      
-      <hr>
         
       <div id="picture"></div>
       <div id="profile"></div>    
