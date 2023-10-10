@@ -3,7 +3,6 @@ package com.gdu.app05.dao;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.gdu.app05.dto.BoardDto;

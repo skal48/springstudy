@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.gdu.app06.dao.BoardDao;
 import com.gdu.app06.dto.BoardDto;
 
-import lombok.NoArgsConstructor;
-
 public class BoardServiceImpl implements IBoardService {
   
   private BoardDao boardDao;

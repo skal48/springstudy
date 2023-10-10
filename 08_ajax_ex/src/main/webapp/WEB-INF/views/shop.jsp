@@ -20,8 +20,8 @@
 			  type: 'get',
 			  url: '${contextPath}/shop/search.go',
 			  data: {
-				       'searchNo' : $('#searchNo').val(),
-			         'order' : $('.order').val(),
+				     'display' : $('#display').val(),
+			         'sort' : $('.order').val(),
 			         'keyword': $('#keyword').val()
 			         },
 				dataType: 'json',
@@ -52,7 +52,7 @@
 	<form action ="${contextPath}/shop/search.go" method="get"> 
 		 <div>
 		 검색결과건수
-		 	<select id="searchNo">
+		 	<select id="display">
 		 		<option value="10" >10</option>
 		 		<option value="15">15</option>
 		 		<option value="20">20</option>

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gdu.app05.service.BoardService;
-import com.gdu.app05.service.BoardServiceImpl;
 
 @Controller // 컨트롤러 전용 @Component
 public class BoardController {

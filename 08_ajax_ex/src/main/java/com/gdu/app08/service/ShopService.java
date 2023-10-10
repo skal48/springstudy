@@ -2,7 +2,6 @@ package com.gdu.app08.service;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.List;
 import java.util.Map;
 
 public interface ShopService {

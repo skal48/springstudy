@@ -42,5 +42,5 @@ public class AjaxController03 {
                     , HttpStatus.OK);                       //응답 코드(200)
   }
   
-  
+ 
 }

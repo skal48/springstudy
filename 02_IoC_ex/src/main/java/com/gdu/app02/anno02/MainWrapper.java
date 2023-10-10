@@ -2,7 +2,6 @@ package com.gdu.app02.anno02;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class MainWrapper {
 
