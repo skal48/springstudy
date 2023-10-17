@@ -16,4 +16,17 @@ public interface MemberMapper {
   
   // 전체개수 
   public int getMemberCount();
+  
+  public MemberDto getMember(int memberNo);
+  
+  public int updateMember(MemberDto memberDto);
+  
+  public int deleteMember(int memberNo);
+  
+  public int deleteMembers(List<String> list);
+  
+  /*
+   * #{} 문자열로 '3,4' 처럼 된다. 
+   * ${} 문자로 3,4
+   */
 }

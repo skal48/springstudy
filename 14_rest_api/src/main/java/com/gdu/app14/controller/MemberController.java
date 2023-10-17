@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,10 +57,33 @@ public class MemberController {
     //회원 목록 요청
     // 경로에 포함되어 있는 변수{page}는 @PathVariable을 이용해서 가져올 수 있다. 
     @RequestMapping(value="/members/page/{p}", method = RequestMethod.GET, produces = "application/json")
-    public Map<String, Object> getmembers(@PathVariable(value="p",required=false) Optional<String> opt,HttpServletResponse response) {
+    public Map<String, Object> getmembers(@PathVariable(value="p",required=false) Optional<String> opt) { // 그냥 int 가 온다면  Value, required 안해도 됨 
       int page = Integer.parseInt(opt.orElse("1"));
       return memberService.getMembers(page);
       
     }
+    //회원 조회 요청
+    @RequestMapping(value="/members/{mNo}", method = RequestMethod.GET, produces = "application/json")
+    public Map<String, Object> getMember(@PathVariable(value="mNo") int memberNo ) {
+      return memberService.getMember(memberNo);
+    }
+    //회원 정보 수정
+    @RequestMapping(value="/members", method = RequestMethod.PUT, produces = "application/json")
+    public Map<String, Object> modifyMember(@RequestBody MemberDto memberDto) {
+      return memberService.modifyMember(memberDto);       
+    }
+    
+    //회원 정보 삭제
+    @RequestMapping(value="/member/{memberNo}", method=RequestMethod.DELETE, produces = "application/json" )
+    public Map<String, Object> deleteMember(@PathVariable(value="memberNo") int memberNo) {
+      return memberService.deleteMember(memberNo);
+    }
+    
+    //회원 정보 모두 삭제
+    @RequestMapping(value="/members/{memberNoList}", method=RequestMethod.DELETE, produces = "application/json" )
+    public Map<String, Object> deleteMembers(@PathVariable(value="memberNoList") String memberNoList) {
+      return memberService.deleteMembers(memberNoList);
+    }
+    
   
 }
