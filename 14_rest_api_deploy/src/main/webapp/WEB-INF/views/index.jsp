@@ -23,7 +23,7 @@
 	  fnMemberList();
 	  fnMemberDetail();
 	  fnMemberModify();
-	  fnMemberDelete();
+	  fnRemoveMember();
 	  fnRemoveMembers();
   })
 
@@ -53,10 +53,8 @@
 	  $(':radio[value=none]').prop('checked', true);
 	  $('#address').val('');
 	  $('#btn_register').prop('disabled', false);
-   	  $('#btn_modify').prop('disabled', true);
-   	  $('#btn_delete').prop('disabled', true);
-   	  
-
+    $('#btn_modify').prop('disabled', true);
+    $('#btn_remove').prop('disabled', true);
   }
   
   // 회원 등록
@@ -113,11 +111,10 @@
 				  tr += '<td>'+member.name+'</td>';
 				  tr += '<td>'+member.gender+'</td>';
 				  tr += '<td>'+member.address+'</td>';
-				  tr += '<td><button type="button" class="btn_detail" data-member_no="'+member.memberNo+'">조회</button></td>';	
+				  tr += '<td><button type="button" class="btn_detail" data-member_no="'+member.memberNo+'">조회</button></td>';
 				  tr += '</tr>';
-				  $('#member_list').append(tr);				  
+				  $('#member_list').append(tr);
 			  })
-			  
 			  // 페이징
 			  $('#paging').html(resData.paging);
 		  }
@@ -125,6 +122,7 @@
   }
   
   // 페이지를 바꿀때마다 호출되는 fnAjaxPaging 함수
+  // PageUtil의 getAjaxPaging() 메소드에서 언제 호출되는지 확인 가능함
   function fnAjaxPaging(p){
 	  page = p;        // 페이지 번호를 바꾼다.
 	  fnMemberList();  // 새로운 목록을 가져온다.
@@ -151,9 +149,8 @@
 					  $(':radio[value=' + member.gender + ']').prop('checked', true);
 					  $('#address').val(member.address);
 					  $('#btn_register').prop('disabled', true);
-					  $('#btn_modify').prop('disabled', false);					  
-					  $('#btn_delete').prop('disabled', false);					  
-					  					  
+					  $('#btn_modify').prop('disabled', false);
+					  $('#btn_remove').prop('disabled', false);
 				  }
 			  }
 		  })
@@ -188,80 +185,68 @@
 	  })
   }
   
-  //회원 번호 삭제 
-  function fnMemberDelete() {
-	  $('#btn_delete').click(function(){
+  // 회원 정보 삭제
+  function fnRemoveMember(){
+	  $('#btn_remove').click(function(){
 		  if(!confirm('회원 정보를 삭제할까요?')){
 			  return;
 		  }
-		$.ajax({
-			//요청
-			type: 'delete',
-			url: '${contextPath}/member/'+ $('#memberNo').val(),
-			contentType: 'application/json',
-			//응답
-			dataType:'json',	
-			success: function(resData) {
-				if(resData.deleteResult === 1){
-					alert('회원 정보가 삭제되었습니다.');
-					page =1 ;
-					fnMemberList();
-					fnInit();
-				} else {
-					alert('회원 정보가 삭제되지 않았습니다.')
-				}	
-			}
-		})
-	})
-}
-  
-  //회원들의 정보 삭제
-  function fnRemoveMembers() {
-	  $('#btn_remove_list').click(function() {
-		// 체크된 요소의 value를 배열 arr에 저장하기(push 메소드)
-		  if(!confirm('회원 정보를 삭제할까요?')){
+		  $.ajax({
+			  // 요청
+			  type: 'delete',
+			  url: '${contextPath}/member/' + $('#memberNo').val(),
+			  // 응답
+			  dataType: 'json',
+			  success: function(resData){
+				  if(resData.removeResult === 1){
+					  alert('회원 정보가 삭제되었습니다.');
+	          page = 1;
+	          fnMemberList();
+	          fnInit();
+				  } else {
+					  alert('회원 정보가 삭제되지 않았습니다.');
+				  }
+			  }
+		  })
+	  })
+  }
+
+  // 회원들의 정보 삭제
+  function fnRemoveMembers(){
+	  $('#btn_remove_list').click(function(){
+		  // 체크된 요소의 value를 배열 arr에 저장하기(push 메소드)
+		  var arr = [];
+		  var chkOne = $('.chk_one');
+		  $.each(chkOne, function(i, elem){
+			  if($(elem).is(':checked')){  // if($(elem).prop('checked'))
+				  arr.push($(elem).val());
+			  }
+		  })
+		  // 체크된 요소가 없으면 삭제 중지
+		  if(arr.length === 0){
+			  alert('선택된 회원 정보가 없습니다. 다시 시도하세요.');
 			  return;
 		  }
-		var arr = [];		
-		var chkOne = $('.chk_one');
-		$.each(chkOne, function(i, elem) {
-			
-			if($(elem).is(':checked')){ //if 에서 많이 씀 ==if($(elem).prop('checked'))
-				arr.push($(elem).val())
-			}
-		})
-		
-		if(arr.lenght === 0){
-			alert('선택된 회원의 정보가 없습니다. 다시 시도하세요.');
-			return;
-		}
-		//선택된 회원 삭제 
-		$.ajax({
-			type: 'delete',
-			url: '${contextPath}/members/'+ arr.join(','),
-			//응답
-			dataType: 'json',
-			success: function(resData) {
-				if(resData.deleteResult > 1){
-					alert('선택한 회원 정보가 삭제되었습니다.');
-					page =1 ;
-					fnMemberList();
-					fnInit();
-				} else {
-					alert('선택한 회원 정보가 삭제되지 않았습니다.');
-				}	
-				
-			}
-			
-			
-		})
-		
-		
-	})
-	
-}
-  
-  
+		  // 선택된 회원 삭제
+		  $.ajax({
+			  // 요청
+			  type: 'delete',
+			  url: '${contextPath}/members/' + arr.join(','),
+			  // 응답
+			  dataType: 'json',
+			  success: function(resData){
+				  if(resData.removeResult > 0){
+					  alert('선택한 회원 정보들이 삭제되었습니다.');
+			      page = 1;
+            fnMemberList();
+            fnInit();
+				  } else {
+					  alert('선택한 회원 정보들이 삭제되지 않았습니다.');
+				  }
+			  }
+		  })
+	  })
+  }
   
 </script>
 
@@ -299,9 +284,8 @@
     <div>
       <button type="button" onclick="fnInit()">초기화</button>
       <button type="button" id="btn_register">등록</button>
-      <button type="button" id="btn_modify">수정</button>     
-      <button type="button" id="btn_delete">삭제</button>
-       
+      <button type="button" id="btn_modify">수정</button>
+      <button type="button" id="btn_remove">삭제</button>
     </div>
   </div>
 
@@ -309,7 +293,7 @@
   
   <div>
     <div>
-      <button type="button" id="btn_remove_list">모두 지우기</button>
+      <button type="button" id="btn_remove_list">선택삭제</button>
     </div>
     <table border="1">
       <thead>
