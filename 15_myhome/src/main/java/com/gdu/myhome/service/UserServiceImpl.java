@@ -1,17 +1,21 @@
 package com.gdu.myhome.service;
 
 import java.io.PrintWriter;
+import java.net.http.HttpHeaders;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.gdu.myhome.dao.UserMapper;
 import com.gdu.myhome.dto.UserDto;
 import com.gdu.myhome.util.MySecurityUtils;
+import com.gdu.myhome.util.MyjavaMailUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
   private final UserMapper userMapper;
   private final MySecurityUtils mySecurityUtils;
+  private final MyjavaMailUtils myjavaMailUtils;
   
   @Override
   public void login(HttpServletRequest request, HttpServletResponse response) {
@@ -67,12 +72,37 @@ public class UserServiceImpl implements UserService {
     
     session.invalidate();    //세션 초기화 
     try{        
-      response.sendRedirect(request.getContentType() + "/main.do");     
+      response.sendRedirect(request.getContextPath() + "/main.do");     
     }catch(Exception e) {
       e.printStackTrace();
     }
     
   }
   
+  @Override
+  public ResponseEntity<Map<String, Object>> checkEmail(String email) {
+    
+   Map<String, Object> map = Map.of("email", email);
+   
+   boolean enableEmail = userMapper.getUser(map) == null
+                       && userMapper.getLeaveUser(map) == null 
+                       && userMapper.getInactiveUser(map) == null;
+    
+    return new ResponseEntity<>(Map.of("enableEmail", enableEmail), HttpStatus.OK);
+  }
+  
+  @Override
+  public ResponseEntity<Map<String, Object>> sendCode(String email) {
+    
+    //RandomString 생성(6자리, 문자사용, 숫자사용)
+    String code = mySecurityUtils.getRandomString(6, true, true);
+    
+    // 메일전송
+    myjavaMailUtils.sendJavaMail(email
+                               , "myhome 인증 코드"
+                               , "<div>인증코드는 <strong>" + code + "</strong>입니다.</div>");
+    
+    return new ResponseEntity<>(Map.of("code",code), HttpStatus.OK);
+  }
   
 }

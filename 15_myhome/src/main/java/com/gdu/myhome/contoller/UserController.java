@@ -1,8 +1,11 @@
 package com.gdu.myhome.contoller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,4 +59,13 @@ public class UserController {
     return rtn;
   }
   
+  @GetMapping(value = "/checkEmail.do", produces = "application/json")  //application/json 대신 MediaType.application_JSON_VALUE써도 됨
+  public ResponseEntity<Map<String, Object>> checkEmail(@RequestParam String email) {
+    return userService.checkEmail(email);
+  }
+  
+  @GetMapping(value = "/sendCode.do", produces = "application/json" )
+  public ResponseEntity<Map<String, Object>> sendCode(@RequestParam String email){
+    return userService.sendCode(email);
+  }
 }

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -9,11 +9,8 @@
   <jsp:param value="회원가입" name="title"/>
 </jsp:include>
 
-<script src="${contextPath}/resources/js/user_join.js"></script>
-<script>
+<script src="${contextPath}/resources/js/user_join.js?dt=${dt}"></script>
 
-
-</script>
  <div>
  
   <form id="frm_join" method="post" action="${contextPath}/user/join.do">
@@ -29,7 +26,7 @@
         </div>
         <div>
           <input type="text" id="code" placeholder="인증코드입력">
-          <button type="button" id="btn_werifiy_code">인증하기</button>
+          <button type="button" id="btn_verify_code" disabled>인증하기</button>
         </div>
     </div>
     <hr>
