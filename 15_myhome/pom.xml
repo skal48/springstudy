@@ -17,6 +17,28 @@
   </properties>
 
   <dependencies>
+  <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context-support</artifactId>
+	    <version>${org.springframework-version}</version>
+	</dependency>
+  
+  <!--  Random String 생성 (이메일 인증코드 생성) -->
+  <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-lang3</artifactId>
+	    <version>3.12.0</version>
+	</dependency>
+  <!-- 이메일 전송 API(javax.mail + spring=context-support) -->
+  <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
+	<dependency>
+	    <groupId>javax.mail</groupId>
+	    <artifactId>javax.mail-api</artifactId>
+	    <version>1.6.2</version>
+	</dependency>
+  
 	
 	<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 	<dependency>
@@ -44,7 +66,7 @@
       <artifactId>aspectjrt</artifactId>
       <version>${org.aspectj-version}</version>
     </dependency>
-
+	  <!--  logback 쿼리  -->	
     <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -57,7 +79,7 @@
       <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
       <version>1.16</version>
     </dependency>
-
+		<!-- Test -->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -71,7 +93,7 @@
       <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
-  
+  	<!-- Java(Object, map, List) <-> json -->
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -124,6 +146,7 @@
       <artifactId>spring-context</artifactId>
       <version>${org.springframework-version}</version>
       <exclusions>
+      
         <!-- Exclude Commons Logging in favor of SLF4j -->
         <exclusion>
           <groupId>commons-logging</groupId>
@@ -136,7 +159,7 @@
       <artifactId>spring-webmvc</artifactId>
       <version>${org.springframework-version}</version>
     </dependency>
-        
+     <!-- autowired 로 대신 씀 -->   
     <!-- @Inject -->
     <dependency>
       <groupId>javax.inject</groupId>

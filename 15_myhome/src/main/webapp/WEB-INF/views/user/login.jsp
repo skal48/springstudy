@@ -20,14 +20,15 @@
     <input type="password" name="pw" is="pw" placeholder="●●●●●●">
   </div>  
    <div>
+    <input type="hidden" name="referer" value="${referer}">
     <button type="submit">로그인</button>
    </div>   
  </form>
  
  <div>
     <ul>
-      <li><a href="${contextPath}">자동로그인</a>
-      <li><a href="${contextPath}">아이디/비밀번호 찾기</a>
+      <li><a href="${contextPath}">자동로그인 |</a>
+      <a href="${contextPath}">아이디/비밀번호 찾기</a>
     </ul>
  </div>
  
