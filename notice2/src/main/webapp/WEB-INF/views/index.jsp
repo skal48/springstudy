@@ -12,7 +12,7 @@
 <body>
 
   <div>
-    <h3><a href="${contextPath}/contact/list.do">연락처관리</a></h3>
+    <h3><a href="${contextPath}/notice/list.do">공지사항</a></h3>
   </div>
 
 </body>

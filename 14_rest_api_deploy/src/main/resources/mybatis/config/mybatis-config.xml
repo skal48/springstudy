@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    
+  <!-- 설정 -->
+  <settings>
+    <setting name="mapUnderscoreToCamelCase" value="true"/>
+  </settings>
+
+  <typeAliases>
+	  <typeAlias alias="MemberDto" type="com.gdu.app14.dto.MemberDto"/>   <!--  별명 주는 거다 membermapper 에서 모든 주소 쓰기에는 너무 길어서 memberDto라고 주는 거  -->
+	 
+  </typeAliases>
+</configuration>
