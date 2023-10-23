@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="dt" value="<%=System.currentTimeMillis() %>" />
-
+<c:set var="dt" value="<%=System.currentTimeMillis()%>" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,16 +16,14 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/footer.css?dt=${dt}" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
-
-
 </head>
 <body>
 
   <div class="header_wrap">
     <div class="logo"></div>
     <div class="login_wrap">
-     <c:if test="${sessionScope.user == null}">
-        <ul>
+      <c:if test="${sessionScope.user == null}">
+        <ul class="ul_menu right_wrap">
           <li><a href="${contextPath}/user/login.form">로그인</a></li>
           <li><a href="${contextPath}/user/agree.form">회원가입</a></li>
         </ul>
@@ -40,10 +38,9 @@
         <li><a href="${contextPath}">댓글형게시판</a></li>
         <li><a href="${contextPath}">계층게시판</a></li>
         <li><a href="${contextPath}">첨부게시판</a></li>
-        <li><a href="${contextPath}">my</a></li>       
-      </ul>    
-      
+        <li><a href="${contextPath}/user/mypage.form">MY</a></li>    <!--  .form  페이지로 이동하는 양식 -->
+      </ul>
     </div>
   </div>
   
-<div class="main_wrap">
+  <div class="main_wrap">

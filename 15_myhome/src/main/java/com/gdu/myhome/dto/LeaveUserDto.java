@@ -1,20 +1,18 @@
 package com.gdu.myhome.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class LeaveUserDto {
-
- 
   private String email;
   private Date joinedAt;
   private Date leavedAt;
-  
 }

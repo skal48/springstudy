@@ -1,17 +1,17 @@
 package com.gdu.myhome.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class InactiveUserDto {
-
   private int userNo;
   private String email;
   private String pw;
@@ -23,7 +23,7 @@ public class InactiveUserDto {
   private String jibunAddress;
   private String detailAddress;
   private int agree;
-  private Date modifiedAt;
+  private Date pwModifiedAt;
   private Date joinedAt;
-  private Date inactiveddAt;
+  private Date inactivedAt;
 }

@@ -18,18 +18,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-@MapperScan(basePackages = "com.gdu.myhome.dao") //@Mapper을 찾을 패키지 
-@EnableTransactionManagement  //@Transactional 허용 
+
+@EnableTransactionManagement                    // @Transactional 허용
+@EnableAspectJAutoProxy                         // @Aspect 허용
+@EnableScheduling                               // @Scheduled 허용
+@MapperScan(basePackages="com.gdu.myhome.dao")  // @Mapper를 찾을 패키지
 @PropertySource(value="classpath:application.properties")
-@EnableAspectJAutoProxy  // @Aspect  허용
-@EnableScheduling   // @scheduled 허용
 @Configuration
 public class AppConfig {
 
   @Autowired
   private Environment env;
   
-  //HikariConfig : HikariCP을 이용해  DB에 접속할 때 필요한 정보 처리하는 Hikari 클래스 
+  // HikariConfig : HikariCP를 이용해 DB에 접속할 때 필요한 정보를 처리하는 Hikari 클래스
   @Bean
   public HikariConfig hikariConfig() {
     HikariConfig hikariConfig = new HikariConfig();
@@ -40,39 +41,32 @@ public class AppConfig {
     return hikariConfig;
   }
   
-  
-  // HikariDataSource : CP(Connection Pool)을 처리하는 Hikari 클래스 
+  // HikariDataSource : CP(Connection Pool)을 처리하는 Hikari 클래스
   @Bean
   public HikariDataSource hikariDataSource() {
-    
     return new HikariDataSource(hikariConfig());
   }
+  
   // SqlSessionFactory : SqlSessionTemplate을 만들기 위한 mybatis 인터페이스
   @Bean
-  public SqlSessionFactory sqlSessionFatory() throws Exception {
+  public SqlSessionFactory sqlSessionFactory() throws Exception {
     SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
     sqlSessionFactoryBean.setDataSource(hikariDataSource());
     sqlSessionFactoryBean.setConfigLocation(new PathMatchingResourcePatternResolver().getResource(env.getProperty("mybatis.config-location")));
     sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
     return sqlSessionFactoryBean.getObject();
-    
-  }
-
-  // SqlSessionTemplate : 쿼리 실행을 담당하는 mybatis 클래스 
-  @Bean
-  public SqlSessionTemplate sqlSessionTemplate() throws Exception{
-    return new SqlSessionTemplate(sqlSessionFatory());
   }
   
+  // SqlSessionTemplate : 쿼리 실행을 담당하는 mybatis 클래스
+  @Bean
+  public SqlSessionTemplate sqlSessionTemplate() throws Exception {
+    return new SqlSessionTemplate(sqlSessionFactory());
+  }
+
   // TransactionManager : 트랜잭션을 처리하는 스프링 인터페이스
   @Bean
   public TransactionManager transactionManager() {
     return new DataSourceTransactionManager(hikariDataSource());
   }
-  
-  
-  
- 
-  
   
 }
