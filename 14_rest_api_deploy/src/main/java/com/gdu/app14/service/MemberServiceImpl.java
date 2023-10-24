@@ -75,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
     map.put("member", memberMapper.getMember(memberNo));
     return map;
   }
-  
+    
   @Override
   public Map<String, Object> modifyMember(MemberDto memberDto) {
     int modifyResult = memberMapper.updateMember(memberDto);
