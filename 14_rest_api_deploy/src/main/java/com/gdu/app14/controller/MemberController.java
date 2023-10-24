@@ -59,6 +59,7 @@ public class MemberController {
     @RequestMapping(value="/members/page/{p}", method = RequestMethod.GET, produces = "application/json")
     public Map<String, Object> getmembers(@PathVariable(value="p",required=false) Optional<String> opt) { // 그냥 int 가 온다면  Value, required 안해도 됨 
       int page = Integer.parseInt(opt.orElse("1"));
+      System.out.println(memberService.getMembers(page));
       return memberService.getMembers(page);
       
     }
