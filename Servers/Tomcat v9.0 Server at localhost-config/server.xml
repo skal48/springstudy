@@ -165,7 +165,7 @@
 
       
       
-      <Context docBase="staff" path="/staff" reloadable="true" source="org.eclipse.jst.jee.server:staff"/></Host>
+      <Context docBase="staff" path="/staff" reloadable="true" source="org.eclipse.jst.jee.server:staff"/><Context docBase="15_myhome" path="/myhome" reloadable="true" source="org.eclipse.jst.jee.server:15_myhome"/></Host>
 
     </Engine>
   </Service>
