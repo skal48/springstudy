@@ -9,14 +9,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class BlogDto {
-  private int blogNo;
-  private String title;
+public class CommentDto {
+  private int commentNo;
   private String contents;
   private int userNo;
-  private int hit;
-  private String ip;
+  private int blogNo;
   private String createdAt;
   private String modifiedAt;
+  private int status; 
+  private int depth; 
+  private int groupNo;
   
 }

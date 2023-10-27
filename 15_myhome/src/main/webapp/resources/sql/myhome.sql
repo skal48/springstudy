@@ -1,5 +1,6 @@
 -- 시퀀스
 DROP SEQUENCE USER_SEQ;
+DROP SEQUENCE BLOG_IMAGE_T; 
 DROP SEQUENCE BLOG_SEQ;
 DROP SEQUENCE COMMENT_SEQ;
 DROP SEQUENCE FREE_SEQ;
@@ -77,10 +78,10 @@ CREATE TABLE FREE_T (
     EMAIL       VARCHAR2(100 BYTE) NULL,
     CONTENTS    VARCHAR2(4000 BYTE)  NOT NULL,
     CREATED_AT  TIMESTAMP           NULL,
-    STATUS      NUMBER              NOT NULL,   -- 1:정상 0:삭제(실제로 삭제되지 않는 게시판)
-    DEPTH       NUMBER              NOT NULL,
-    GROUP_NO    NUMBER              NOT NULL,
-    GROUP_ORDER  NUMBER              NOT NULL,
+    STATUS      NUMBER              NOT NULL,  -- 1:정상, 0:삭제 (실제로 삭제되지 않는 게시판)
+    DEPTH       NUMBER              NOT NULL,  -- 0:원글, 1:댓글, 2:대댓글, ...
+    GROUP_NO    NUMBER              NOT NULL,  -- 원글과 모든 댓글(댓글, 대댓글)은 동일한 GROUP_NO를 가져야 함
+    GROUP_ORDER NUMBER              NOT NULL,  -- 같은 그룹 내 정렬 순서
     CONSTRAINT PK_FREE PRIMARY KEY(FREE_NO),
     CONSTRAINT FK_USER_FREE FOREIGN KEY(EMAIL) REFERENCES USER_T(EMAIL) ON DELETE SET NULL  
 );
@@ -89,17 +90,27 @@ CREATE TABLE FREE_T (
 
 -- 블로그 (댓글형)
 CREATE TABLE BLOG_T(
-    BLOG_NO     NUMBER              NOT NULL,
-    TITLE       VARCHAR2(500 BYTE)  NOT NULL,
-    CONTENTS    CLOB                NULL,
+    BLOG_NO     NUMBER              NOT NULL,     -- 블로그 번호
+    TITLE       VARCHAR2(500 BYTE)  NOT NULL,     -- 제목          
+    CONTENTS    CLOB                NULL,         -- 내용  
     USER_NO     NUMBER              NOT NULL,                      -- NOT NULL  이면 사용자가 탈퇴하면 블로글 글이 다 날아간다. 잘 생각하자 
-    HIT         NUMBER              DEFAULT 0,
-    IP          VARCHAR2(30 BYTE)   NULL,
-    CREATED_AT VARCHAR2(30 BYTE)    NULL,
-    MODIFIED_AT VARCHAR2(30 BYTE)   NULL,
+    HIT         NUMBER              DEFAULT 0,     -- 조회수
+    IP          VARCHAR2(30 BYTE)   NULL,          -- IP 주소 
+    CREATED_AT VARCHAR2(30 BYTE)    NULL,          -- 작성일 
+    MODIFIED_AT VARCHAR2(30 BYTE)   NULL,          -- 수정일
     CONSTRAINT PK_BLOG_NO PRIMARY KEY(BLOG_NO),
     CONSTRAINT FK_USER_BLOG FOREIGN KEY(USER_NO) REFERENCES USER_T(USER_NO) ON DELETE CASCADE  -- 작성자가 삭제되면 블로그도 함께 삭제된다. 
 );    
+
+-- 블로그 이미지 목록
+CREATE TABLE BLOG_IMAGE_T (
+        BLOG_NO         NUMBER              NOT NULL,
+        IMAGE_PATH      VARCHAR2(100 BYTE),
+        FILESYSTEM_NAME VARCHAR2(100 BYTE),
+        CONSTRAINT FK_BLOG_IMAGE FOREIGN KEY(BLOG_NO) REFERENCES BLOG_T(BLOG_NO) ON DELETE CASCADE
+        
+);        
+
     
 -- 블로그 댓글
 CREATE TABLE COMMENT_T (
@@ -108,6 +119,9 @@ CREATE TABLE COMMENT_T (
    USER_NO      NUMBER,
    BLOG_NO      NUMBER              NOT NULL,
    CREATED_AT   VARCHAR2(30 BYTE)       NULL,  
+   STATUS      NUMBER              NOT NULL,  -- 1:정상, 0:삭제 (실제로 삭제되지 않는 게시판)
+   DEPTH       NUMBER              NOT NULL,  -- 0:원글, 1:댓글, 2:대댓글, ...
+   GROUP_NO    NUMBER              NOT NULL,  -- 원글과 모든 댓글(댓글, 대댓글)은 동일한 GROUP_NO를 가져야 함
    CONSTRAINT PK_COMMENT_NO PRIMARY KEY(COMMENT_NO),
    CONSTRAINT FK_USER_COMMENT FOREIGN KEY(USER_NO) REFERENCES USER_T(USER_NO) ON DELETE SET NULL,
    CONSTRAINT FK_BLOG_COMMENT FOREIGN KEY(BLOG_NO) REFERENCES BLOG_T(BLOG_NO) ON DELETE CASCADE
@@ -125,6 +139,7 @@ INSERT INTO USER_T VALUES(USER_SEQ.NEXTVAL, 'user3@naver.com', STANDARD_HASH('33
 INSERT INTO ACCESS_T VALUES('user1@naver.com', TO_DATE('20231018', 'YYYYMMDD'));  -- 정상 회원 (user1)
 INSERT INTO ACCESS_T VALUES('user2@naver.com', TO_DATE('20220201', 'YYYYMMDD'));  -- 휴면 회원 (user2)
                                                                                   -- 휴면 회원 (user3)
+                                                                                  
                                                                                   
 INSERT INTO FREE_T VALUES (FREE_SEQ.NEXTVAL, 'user2@naver.com', '내용1', SYSTIMESTAMP, 1, 0 , FREE_SEQ.CURRVAL,0);
 INSERT INTO FREE_T VALUES (FREE_SEQ.NEXTVAL, 'user3@naver.com', '내용1', SYSTIMESTAMP, 1, 0 , FREE_SEQ.CURRVAL,0);
@@ -244,3 +259,16 @@ SELECT FREE_NO, EMAIL, CONTENTS, CREATED_AT, STATUS, DEPTH, GROUP_NO, GROUP_ORDE
   FROM (SELECT ROW_NUMBER() OVER(ORDER BY FREE_NO DESC) AS RN, FREE_NO, EMAIL, CONTENTS, CREATED_AT, STATUS, DEPTH, GROUP_NO, GROUP_ORDER
             FROM FREE_T)
  WHERE RN BETWEEN 5 AND 10;  
+ 
+ --2. 검색
+ 
+ -- 1) 결과 개수
+ SELECT COUNT(*)
+   FROM FREE_T
+  WHERE EMAIL LIKE '%' || 'user1' || '%'; 
+  
+-- 2) 결과 목록
+ SELECT FREE_NO, EMAIL, CONTENTS, CREATED_AT, STATUS, DEPTH, GROUP_NO, GROUP_ORDER
+  		FROM (SELECT ROW_NUMBER() OVER(ORDER BY FREE_NO DESC, GROUP_NO DESC, GROUP_ORDER ASC) AS RN, FREE_NO, EMAIL, CONTENTS, CREATED_AT, STATUS, DEPTH, GROUP_NO, GROUP_ORDER
+            FROM FREE_T WHERE EMAIL LIKE '%' || 'user1' || '%')
+ 		 WHERE RN BETWEEN 1 AND 10;  

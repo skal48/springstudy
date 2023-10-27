@@ -9,16 +9,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">  
 <title>${param.title == null ? '마이홈' : param.title}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <link rel="stylesheet" href="${contextPath}/resources/css/init.css?dt=${dt}" />
 <link rel="stylesheet" href="${contextPath}/resources/css/header.css?dt=${dt}" />
 <link rel="stylesheet" href="${contextPath}/resources/css/main.css?dt=${dt}" />
 <link rel="stylesheet" href="${contextPath}/resources/css/footer.css?dt=${dt}" />
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  
   <div class="header_wrap">
     <div class="logo"></div>
     <div class="login_wrap">
@@ -36,7 +40,7 @@
     <div class="gnb_wrap">
       <ul class="gnb">
         <li><a href="${contextPath}/free/list.do">계층형게시판</a></li>
-        <li><a href="${contextPath}">댓글형게시판</a></li>
+        <li><a href="${contextPath}/blog/list.do">댓글형게시판</a></li>
         <li><a href="${contextPath}">첨부게시판</a></li>
         <li><a href="${contextPath}/user/mypage.form">MY</a></li>    <!--  .form  페이지로 이동하는 양식 -->
       </ul>

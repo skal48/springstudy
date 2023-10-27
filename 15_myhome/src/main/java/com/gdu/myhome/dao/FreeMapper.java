@@ -9,7 +9,12 @@ import com.gdu.myhome.dto.FreeDto;
 
 @Mapper
 public interface FreeMapper {
-  public int insertFree(FreeDto freeDto);
+  public int insertFree(FreeDto free);
   public List<FreeDto> getFreeList(Map<String, Object> map);
   public int getFreeCount(); 
+  public int updateGroupOrder(FreeDto free);
+  public int insertReply(FreeDto free);
+  public int deleteFree(int freeNo);
+  public int getSearchCount(Map<String, Object> map);
+  public List<FreeDto> getSearchList(Map<String, Object> map);
 }

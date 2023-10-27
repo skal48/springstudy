@@ -9,14 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class BlogDto {
+public class BlogImageDto {
   private int blogNo;
-  private String title;
-  private String contents;
-  private int userNo;
-  private int hit;
-  private String ip;
-  private String createdAt;
-  private String modifiedAt;
+  private String imagePath;
+  private String filesystemName;
+ 
   
 }

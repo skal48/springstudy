@@ -27,7 +27,7 @@ public class FileServiceImpl implements FileService {
     //순회
     for(MultipartFile multipartFile : files) {
       // 첨부 여부 확인
-      if(multipartFile != null && ! multipartFile.isEmpty()) {
+      if(multipartFile != null && !multipartFile.isEmpty()) {
         
         try{
           
@@ -51,9 +51,6 @@ public class FileServiceImpl implements FileService {
           
           // 첨부파일 저장하기 
           multipartFile.transferTo(file);
-          
-          //
-          
           
         } catch(Exception e) {
           e.printStackTrace();
