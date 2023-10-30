@@ -31,6 +31,7 @@
  <select id="getMemberCount" resultType="int">
  	SELECT COUNT(*) FROM MEMBER_T
  </select>
+ 
  <select id="getMember" parameterType="int" resultType="MemberDto">
  	SELECT MEMBER_NO, ID, NAME, GENDER, ADDRESS FROM MEMBER_T WHERE MEMBER_NO = #{memberNo}
  
@@ -42,6 +43,7 @@
   					  , ADDRESS = #{address}  					  
   	WHRER MEMBER_NO = #{memberNo}
  </update>
+ 
  <delete id="deleteMember" parameterType="int">
  	DELETE FROM MEMBER_T WHERE MEMBER_NO = #{memberNo}
  </delete>
