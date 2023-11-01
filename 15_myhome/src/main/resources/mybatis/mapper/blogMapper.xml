@@ -139,19 +139,16 @@
   	 WHERE BLOG_NO = #{blogNo}	 
   </update>
   
-  <update id="updateImage" parameterType="BlogImageDto">
-  	UPDATE BLOG_IMAGE_T
-  	   SET IMAGE_PATH = #{imagePath}
-  	   	 , FILESYSTEM_NAME = #{filesystemName}
-  	 WHERE BLOG_NO = #{blogNo} 	 
-  </update>
+  <select id="selectImage" parameterType="BlogImageDto" resultType="String">
+  	SELECT IMAGE_PATH
+  	  FROM BLOG_IMAGE_T
+  	 WHERE FILESYSTEM_NAME = #{filesystemName} 
+  </select>
   
   <delete id="deleteImage" parameterType="BlogImageDto">
   	DELETE 
   		FROM BLOG_IMAGE_T
   	 WHERE BLOG_NO = #{blogNo}
-  	 
-  
   </delete>
   
   

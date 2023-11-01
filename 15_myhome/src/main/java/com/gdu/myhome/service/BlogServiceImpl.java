@@ -199,6 +199,11 @@ public class BlogServiceImpl implements BlogService {
                                     .imagePath(myFileUtils.getBlogImagePath())
                                     .filesystemName(filesystemName)
                                     .build();
+        String inFolder = blogMapper.selectImage(blogImage);
+        
+        
+        
+        
         blogMapper.deleteImage(blogImage);  
         blogMapper.insertBlogImage(blogImage);
       }

@@ -25,6 +25,6 @@ public interface BlogMapper {
   public int getCommentCount(int blogNo);
   public int insertCommentReply(CommentDto comment);
   public int deleteComment(int commentNo);
-  public int updateImage(BlogImageDto blogImage);
+  public String selectImage(BlogImageDto blogImage);
   public int deleteImage(BlogImageDto blogImage);
 }
