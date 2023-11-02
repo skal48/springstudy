@@ -20,7 +20,7 @@
  		<![CDATA[
  		SELECT NO, TITLE, GENRE, DESCRIPTION, STAR
   		FROM MOVIE
- 		 WHERE #{COLUMN} LIKE '%' || #{searchText} || '%' 
+ 		 WHERE ${column} LIKE '%' || #{searchText} || '%' 
  		 ]]>
  </select>
  

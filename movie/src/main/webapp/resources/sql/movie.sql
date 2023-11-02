@@ -11,13 +11,13 @@ CREATE TABLE MOVIE (
  CONSTRAINT PK_MOVIE PRIMARY KEY
 ); 
  
-INSERT INTO MOVIE_T VALUES(MOVIE_SEQ.NEXTVAL, 'í„°ë¯¸ë„¤ì´í„°', 'SF', 'ì¸ê°„ê³¼ ê¸°ê³„ì˜ ëŒ€ì „ìŸ', 5);  
-INSERT INTO MOVIE_T VALUES(MOVIE_SEQ.NEXTVAL, 'ì•„ë°”íƒ€', 'SF', 'íŒë„ë¼ í–‰ì„±ìœ¼ë¡œ í–¥í•œ ì¸ë¥˜', 5);  
-INSERT INTO MOVIE_T VALUES(MOVIE_SEQ.NEXTVAL, 'ì—ì¼ë¦¬ì–¸', 'ê³µí¬', 'ì—ì¼ë¦¬ì–¸ê³¼ì˜ ì‚¬íˆ¬', 4.5);  
-INSERT INTO MOVIE_T VALUES(MOVIE_SEQ.NEXTVAL, 'ì—‘ì†Œì‹œìŠ¤íŠ¸', 'ê³µí¬', 'ì•…ë§ˆì˜ ë§ì€ ë“£ì§€ ë§ê²Œ', 3.5);  
-INSERT INTO MOVIE_T VALUES(MOVIE_SEQ.NEXTVAL, 'ì‡¼ìƒí¬íƒˆì¶œ', 'ë“œë¼ë§ˆ', 'í¬ë§ì€ ë„ˆë¥¼ ìžìœ ë¡­ê²Œ í•˜ë¦¬ë¼', 1);  
-INSERT INTO MOVIE_T VALUES(MOVIE_SEQ.NEXTVAL, 'ì§‘ìœ¼ë¡œ', 'ë“œë¼ë§ˆ', 'í• ë¨¸ë‹ˆ ì € ì™”ì–´ìš”', 2.5);  
-INSERT INTO MOVIE_T VALUES(MOVIE_SEQ.NEXTVAL, 'ì›”-E', 'ì• ë‹ˆë©”ì´ì…˜', 'ì›”-Eì™€ ë§¤ë ¥ì ì¸ ì´ë¸Œ', 1.5);  
-INSERT INTO MOVIE_T VALUES(MOVIE_SEQ.NEXTVAL, 'ì„¼ê³¼ ì¹˜ížˆë¡œì˜ í–‰ë°œë¶ˆëª…', 'ì• ë‹ˆë©”ì´ì…˜', 'ê¸ˆì§€ëœ ì‹ ë“¤ì˜ ì„¸ê³„ë¡œ ì˜¨ ì¹˜ížˆë¡œ', 2);  
-INSERT INTO MOVIE_T VALUES(MOVIE_SEQ.NEXTVAL, 'ê³¼ì†ìŠ¤ìº”ë“¤', 'ì½”ë¯¸ë””', 'ìŠ¤ë¬¼ë‘ì‚´ ë”¸ ì—¬ì„¯ì‚´ ì†ìž', 3);  
-INSERT INTO MOVIE_T VALUES(MOVIE_SEQ.NEXTVAL, 'ì—½ê¸°ì ì¸ ê·¸ë…€', 'ì½”ë¯¸ë””', 'ê²¬ìš°ì•¼ ë¯¸ì•ˆí•´', 4);  
+INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, 'ÅÍ¹Ì³×ÀÌÅÍ', 'SF', 'ÀÎ°£°ú ±â°èÀÇ ´ëÀüÀï', 5);  
+INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, '¾Æ¹ÙÅ¸', 'SF', 'ÆÇµµ¶ó Çà¼ºÀ¸·Î ÇâÇÑ ÀÎ·ù', 5);  
+INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, '¿¡ÀÏ¸®¾ð', '°øÆ÷', '¿¡ÀÏ¸®¾ð°úÀÇ »çÅõ', 4.5);  
+INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, '¿¢¼Ò½Ã½ºÆ®', '°øÆ÷', '¾Ç¸¶ÀÇ ¸»Àº µèÁö ¸»°Ô', 3.5);  
+INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, '¼î»ýÅ©Å»Ãâ', 'µå¶ó¸¶', 'Èñ¸ÁÀº ³Ê¸¦ ÀÚÀ¯·Ó°Ô ÇÏ¸®¶ó', 1);  
+INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, 'ÁýÀ¸·Î', 'µå¶ó¸¶', 'ÇÒ¸Ó´Ï Àú ¿Ô¾î¿ä', 2.5);  
+INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, '¿ù-E', '¾Ö´Ï¸ÞÀÌ¼Ç', '¿ù-E¿Í ¸Å·ÂÀûÀÎ ÀÌºê', 1.5);  
+INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, '¼¾°ú Ä¡È÷·ÎÀÇ Çà¹ßºÒ¸í', '¾Ö´Ï¸ÞÀÌ¼Ç', '±ÝÁöµÈ ½ÅµéÀÇ ¼¼°è·Î ¿Â Ä¡È÷·Î', 2);  
+INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, '°ú¼Ó½ºÄµµé', 'ÄÚ¹Ìµð', '½º¹°µÎ»ì µþ ¿©¼¸»ì ¼ÕÀÚ', 3);  
+INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, '¿±±âÀûÀÎ ±×³à', 'ÄÚ¹Ìµð', '°ß¿ì¾ß ¹Ì¾ÈÇØ', 4);  
