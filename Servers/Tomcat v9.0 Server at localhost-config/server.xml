@@ -165,7 +165,7 @@
 
       
       
-      <Context docBase="15_myhome" path="/myhome" reloadable="true" source="org.eclipse.jst.jee.server:15_myhome"/><Context docBase="13_file" path="/app13" reloadable="true" source="org.eclipse.jst.jee.server:13_file"/></Host>
+      <Context docBase="movie" path="/movie" reloadable="true" source="org.eclipse.jst.jee.server:movie"/></Host>
 
     </Engine>
   </Service>

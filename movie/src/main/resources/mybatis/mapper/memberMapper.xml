@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gdu.movie.dao.MovieMapper">
+ 
+ <select id="getMovieList" resultType="MovieDto">
+ 	SELECT NO, TITLE, GENRE, DESCRIPTION, STAR
+ 	  FROM MOVIE
+ 	 ORDER BY NO ASC
+ </select>
+ 
+ <select id="getMovieCount" resultType="int">
+ 	 SELECT COUNT(*)
+ 	   FROM MOVIE 
+ </select>
+ 
+ <select id="getSearch" parameterType="Map" resultType="MovieDto">
+ 		<![CDATA[
+ 		SELECT NO, TITLE, GENRE, DESCRIPTION, STAR
+  		FROM MOVIE
+ 		 WHERE #{COLUMN} LIKE '%' || #{searchText} || '%' 
+ 		 ]]>
+ </select>
+ 
+ <select id="getSearchCount" parameterType="Map" resultType="int">
+ 		<![CDATA[
+	  SELECT COUNT(*)
+	    FROM MOVIE
+	   WHERE ${column} LIKE '%' || #{searchText} || '%'
+	  ]]>  
+ </select>
+ 
+ 
+</mapper>
