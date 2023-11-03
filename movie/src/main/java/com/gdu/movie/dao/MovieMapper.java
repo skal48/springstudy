@@ -13,4 +13,5 @@ public interface MovieMapper {
   public List<MovieDto> getMovieList();
   public List<MovieDto> getSearch(Map<String, Object> map); 
   public int getSearchCount(Map<String, Object> map);
+  public MovieDto selectComedy();
 }

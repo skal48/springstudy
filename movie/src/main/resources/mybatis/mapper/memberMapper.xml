@@ -32,5 +32,10 @@
 	  ]]>  
  </select>
  
+ <select id="selectComedy" resultType="MovieDto">
+ 	SELECT NO, TITLE, GENRE, DESCRIPTION, STAR
+  	FROM MOVIE
+   WHERE GENRE = "코미디"	 
+ </select>
  
 </mapper>

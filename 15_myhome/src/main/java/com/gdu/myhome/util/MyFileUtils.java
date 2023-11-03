@@ -24,6 +24,18 @@ public class MyFileUtils {
     return "/upload/" + DateTimeFormatter.ofPattern("yyyy/MM/dd").format(today);
   }
   
+  //블로그 이미지가 저장된 어제 경로를 반환
+  public String getBlogImagePathInYesterday() {
+    LocalDate date = LocalDate.now();
+    date = date.minusDays(1);  // 1일 전
+    return "/blog/" + DateTimeFormatter.ofPattern("yyyy/MM/dd").format(date);
+  }
+  
+  // 임시파일이 저장될 경로 반환하기 (ZIP 파일)
+  public String getTempPath() {
+    return "/temp";
+  }
+  
   // 파일이 저장될 이름 반환하기 
   public String getFilesystemName(String originalName) {
     
@@ -39,10 +51,10 @@ public class MyFileUtils {
     
     return UUID.randomUUID().toString().replace("-", "") + "." + extName;
   }
-  //블로그 이미지가 저장된 어제 경로를 반환
-  public String getBlogImagePathInYesterday() {
-    LocalDate date = LocalDate.now();
-    date = date.minusDays(1);  // 1일 전
-    return "/blog/" + DateTimeFormatter.ofPattern("yyyy/MM/dd").format(date);
+  
+  // 임시 파일 이름 반환하기 (확장자는 제외 이름만 반환) 
+  public String getTempFilename() {
+    return System.currentTimeMillis() +"";
   }
+  
 }

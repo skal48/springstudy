@@ -45,4 +45,9 @@ public class MovieServiceImpl implements MovieService {
         , "status" , 200);
   }
   
+  public void comedyText() {
+    
+  }
+  
+  
 }
