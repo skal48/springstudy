@@ -16,9 +16,9 @@
     <div>작성자: ${upload.userDto.name}</div>
     <div>작성일: ${upload.createdAt}</div>
     <div>수정일: ${upload.modifiedAt}</div>
-    <div>제목: ${upload.title}</div>
+    <div>제목: <input type="text" name="title" value="${upload.title}"></div>
 		<div>내용</div>
-		<div>${upload.contents}</div>
+		<div><textarea name="contents">${upload.contents}</textarea></div>
     <div> 
       <form id="frm_btn" method="post">
         <input type="hidden" name="uploadNo" value="${upload.uploadNo}">

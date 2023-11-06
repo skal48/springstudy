@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.gdu.myhome.dto.UploadDto;
+
 public interface UploadService {
 
   public boolean addUpload(MultipartHttpServletRequest multipartRequest) throws Exception;
@@ -18,4 +20,5 @@ public interface UploadService {
   public ResponseEntity<Resource> download(HttpServletRequest request);
   public ResponseEntity<Resource> downloadAll(HttpServletRequest request);
   public void removeTempFiles();
+  public UploadDto getUpload(int uplaodNo);
 }
